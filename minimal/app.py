@@ -1,4 +1,8 @@
 # coding: utf-8
+# 
+# 这个实例使用kaixin.py事件机制创建一个WSGI应用，并启动一个WSGI服务器接受客户端请求。
+# WSGI是Web Server Gateway Interface的缩写，关于WSGI的详细信息请访问wsgi.org。
+#
 
 from wsgiref.simple_server import make_server
 
@@ -7,18 +11,19 @@ from kaixin.core.http import STATUS
 
 def sayhi(context):
     response = context.response
-    response.append_response_body('hello world!')
-    response.set_response_status(STATUS._200)
+    response.append_response_body('hello world!') # 添加输出内容
+    response.set_response_status(STATUS._200) # 设置HTTP STATUS CODE
+    return False # 让事件可以继续传播下去，返回True则表示中断事件传播
 
 def app(environ, start_response):
-    request = wsgi.Request(environ)
-    response = wsgi.Response()
-    context = wsgi.Context(request, response)
-    context.events.add_listener('dispatch', sayhi)
-    context.events.fire_event('dispatch', context=context)
-    start_response(response.get_response_status(), response.get_response_headers())
-    return response.get_response_body()
+    request = wsgi.Request(environ) # 创建一个Request对象
+    response = wsgi.Response() # 创建一个Response对象
+    context = wsgi.Context(request, response) # 创建一个Context对象
+    context.events.add_listener('dispatch', sayhi) # 注册dispath事件监听函数
+    context.events.fire_event('dispatch', context=context) # 激活dispatch事件，sayhi会被调用
+    start_response(response.get_response_status(), response.get_response_headers()) # WSGI调用
+    return response.get_response_body() # 返回输出内容
     
 if __name__ == '__main__':
-    httpd = make_server('127.0.0.1', 9000, app)
-    httpd.handle_request()
+    httpd = make_server('127.0.0.1', 9000, app) # 创建一个WSGI服务器，并在127.0.0.1监听9000端口
+    httpd.handle_request() # 开始处理请求

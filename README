@@ -6,5 +6,8 @@ kaixindev.org
 kaixin.py-samples
 kaixin.py的项目网站py.kaixindev.org告诉你kaixin.py能干什么，而kaixin.py-samples则从一个最小的应用实例，从简到繁，从易到难，一步一步告诉你怎么做。同时也希望通过kaixin.py-samples，你能够从中了解kaixin.py的思想。
 
-minimal
-  使用kaixin.core.wsgi和事件机制创建一个最简单的WSGI应用。
+step1-minimal
+  创建一个最简单的WSGI应用。
+step2-urlmapping
+  映射URL到对应的模块处理。
+  

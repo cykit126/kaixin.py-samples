@@ -8,18 +8,20 @@ from wsgiref.simple_server import make_server
 
 from kaixin.core import wsgi
 from kaixin.core.http import STATUS
-import kaixin.core.events as events
+from kaixin.core.events import register_listener
+from kaixin.core.events import fire_event
 
 # 创建一个WSGI应用实例
 def app(environ, start_response):
     request = wsgi.Request(environ) # 创建一个Request对象
     response = wsgi.Response() # 创建一个Response对象
     context = wsgi.Context(request, response) # 创建一个Context对象
-    events.add_listener('dispatch', sayhi) # 注册dispath事件监听函数
-    events.fire_event('dispatch', context=context) # 激活dispatch事件，sayhi会被调用
+    fire_event('dispatch', context=context) # 激活dispatch事件，sayhi会被调用
     start_response(response.get_response_status(), response.get_response_headers()) # WSGI调用
     return response.get_response_body() # 返回输出内容
 
+# 通过register_listener decorator注册dispatch事件函数
+@register_listener('dispatch')
 def sayhi(context):
     response = context.response
     response.append_response_body('hello world!') # 添加输出内容

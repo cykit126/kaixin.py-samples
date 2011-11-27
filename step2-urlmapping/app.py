@@ -10,15 +10,15 @@ from string import Formatter
 from kaixin.core import wsgi
 from kaixin.core.http import STATUS
 from kaixin.extension.resolver import RegexResolver
-import kaixin.core.events as events
+from kaixin.core.events import fire_event
+from kaixin.core.events import register_listener
 
 # 创建一个WSGI应用实例
 def app(environ, start_response):
     request = wsgi.Request(environ) # 创建一个Request对象
     response = wsgi.Response() # 创建一个Response对象
     context = wsgi.Context(request, response) # 创建一个Context对象
-    events.add_listener('dispatch', dispatch) # 注册dispath事件监听函数
-    events.fire_event('dispatch', context=context) # 激活dispatch事件，sayhi会被调用
+    fire_event('dispatch', context=context) # 激活dispatch事件，sayhi会被调用
     start_response(response.get_response_status(), response.get_response_headers()) # WSGI调用
     return response.get_response_body() # 返回输出内容
 
@@ -26,6 +26,7 @@ def app(environ, start_response):
 resolver = RegexResolver()
 
 # dispatch事件处理函数
+@register_listener('dispatch')
 def dispatch(context):
     request = context.request
     handler, params = resolver.dispatch(request.get_request_url()) # 调用resolver解析URL

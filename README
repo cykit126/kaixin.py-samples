@@ -10,4 +10,6 @@ step1-minimal
   创建一个最简单的WSGI应用。
 step2-urlmapping
   映射URL到对应的模块处理。
+step3-auth
+  添加认证模块，以token=123456作为认证参数放在Query String中作为认证凭据。
   

@@ -1,5 +1,6 @@
 # coding: utf-8
-# 
+#
+# step 1:
 # 这个实例使用kaixin.py事件机制创建一个WSGI应用，并启动一个WSGI服务器接受客户端请求。
 # WSGI是Web Server Gateway Interface的缩写，关于WSGI的详细信息请访问wsgi.org。
 #
@@ -30,4 +31,4 @@ def sayhi(context):
     
 if __name__ == '__main__':
     httpd = make_server('127.0.0.1', 9000, app) # 创建一个WSGI服务器，并在127.0.0.1监听9000端口
-    httpd.handle_request() # 开始处理请求
+    httpd.serve_forever() # 开始处理请求

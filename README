@@ -1,10 +1,15 @@
 罗伟滨 Wilbur Luo
-以coding的方式表达我的思想，阐述我的世界观，结交志同道合的朋友。
 cykit126@gmail.com
 kaixindev.org
 
+
+===============================================================================
+= 简体中文
+===============================================================================
+以coding的方式表达我的思想，阐述我的世界观，结交志同道合的朋友。
+
 kaixin.py-samples
-kaixin.py的项目网站py.kaixindev.org告诉你kaixin.py能干什么，而kaixin.py-samples则从一个最小的应用实例，从简到繁，从易到难，一步一步告诉你怎么做。同时也希望通过kaixin.py-samples，你能够从中了解kaixin.py的思想。
+kaixin.py-samples从一个最小的应用实例，从简到繁，从易到难，一步一步告诉你怎么做。同时也希望通过kaixin.py-samples，你能够从中了解kaixin.py的思想。
 
 step1-minimal
   创建一个最简单的WSGI应用。
@@ -12,4 +17,18 @@ step2-urlmapping
   映射URL到对应的模块处理。
 step3-auth
   添加认证模块，以token=123456作为认证参数放在Query String中作为认证凭据。
-  
+ 
+===============================================================================
+= Engish
+===============================================================================
+Expressing myself and finding friends by coding.
+
+kaixin.py-samples
+kaixin.py-samples is a step-by-step tutorial. Follow this tutorial to learn how kaixin.py work.
+
+step1-minimal
+  A minimal WSGI application in kaixin.py way.
+step2-urlmapping
+  Mapping URL to modules.
+step3-auth
+  Add authentication, verity a token in query string.
